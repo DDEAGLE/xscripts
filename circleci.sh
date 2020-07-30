@@ -18,10 +18,16 @@ if [ $TOOLCHAIN == "clang" ]; then
 
 	for i in ${DEVICES//,/ }
 	do
-		build_clang "deserteagle_${i}_defconfig"
 		BUILDDATE=$(date +"%y%m%d-%H%M")
+		build_clang "deserteagle_${i}_defconfig"
         	ZIPNAME="${KERNELNAME}-${i}-${KERNELVERSION}-${BUILDDATE}.zip"
         	zipper ${i} $ZIPNAME
+		sendmsg_file $ZIPNAME
+		build_clean
+		#build newcam blob
+		build_clang "deserteagle_${i}_newcam_defconfig"
+		ZIPNAME="${KERNELNAME}-${i}-newcam-${KERNELVERSION}-${BUILDDATE}.zip"
+		zipper ${i} $ZIPNAME
 		sendmsg_file $ZIPNAME
 		build_clean
 	done
