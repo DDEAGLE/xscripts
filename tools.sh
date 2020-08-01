@@ -53,7 +53,7 @@ sendmsg_file(){
 }
 
 zipper(){
-	git clone --depth=1 https://github.com/xoroxx/AnyKernel3 -b $1 anykernel
+	git clone --depth=1 https://github.com/DDEAGLE/AnyKernel3 -b release anykernel
 
 	if [ -f $(pwd)/out/arch/arm64/boot/Image.gz-dtb ]; then
 		cp $(pwd)/out/arch/arm64/boot/Image.gz-dtb $(pwd)/anykernel

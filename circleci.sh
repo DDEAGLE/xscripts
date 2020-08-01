@@ -1,7 +1,7 @@
 #!/bin/bash
 
-KERNELNAME=DesertEagle
-KERNELVERSION=test
+KERNELNAME=Deagle
+KERNELVERSION=beta
 DEVICES=whyred,tulip,wayne
 TOOLCHAIN=clang
 
@@ -15,18 +15,19 @@ if [ $TOOLCHAIN == "clang" ]; then
 	git clone --depth=1 https://github.com/NusantaraDevs/clang.git -b dev/11.0 clang
 	START=$(date +"%s")
 	sendmsg_intro $KERNELVERSION $TOOLCHAIN
+	export LOCALVERSION=$KERNELVERSION
 
 	for i in ${DEVICES//,/ }
 	do
 		BUILDDATE=$(date +"%y%m%d-%H%M")
-		build_clang "deserteagle_${i}_defconfig"
+		build_clang "deagle_${i}_defconfig"
         	ZIPNAME="${KERNELNAME}-${i}-${KERNELVERSION}-${BUILDDATE}.zip"
         	zipper ${i} $ZIPNAME
 		sendmsg_file $ZIPNAME
 		build_clean
 		#build newcam blob
-		build_clang "deserteagle_${i}_newcam_defconfig"
-		ZIPNAME="${KERNELNAME}-${i}-newcam-${KERNELVERSION}-${BUILDDATE}.zip"
+		build_clang "deagle_${i}_newcam_defconfig"
+		ZIPNAME="${KERNELNAME}-${i}-${KERNELVERSION}-newcam-${BUILDDATE}.zip"
 		zipper ${i} $ZIPNAME
 		sendmsg_file $ZIPNAME
 		build_clean
