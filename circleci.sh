@@ -2,7 +2,7 @@
 
 KERNELNAME=Deagle
 KERNELVERSION=beta
-DEVICES=whyred,tulip,wayne
+DEVICES=whyred
 TOOLCHAIN=clang
 
 export KBUILD_BUILD_USER=builder
@@ -13,6 +13,9 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 if [ $TOOLCHAIN == "clang" ]; then
 	git clone --depth=1 https://github.com/NusantaraDevs/clang.git -b dev/11.0 clang
+	git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9 --depth=1 gcc
+	git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9 --depth=1 gcc32
+
 	START=$(date +"%s")
 	sendmsg_intro $KERNELVERSION $TOOLCHAIN
 	export LOCALVERSION=$KERNELVERSION
