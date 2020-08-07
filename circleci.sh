@@ -12,7 +12,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 . $DIR/tools.sh
 
 if [ $TOOLCHAIN == "clang" ]; then
-	git clone --depth=1 https://github.com/NusantaraDevs/clang.git -b dev/11.0 clang
+	git clone --depth=1 https://github.com/NusantaraDevs/clang.git -b dev/12.0 clang
 	#git clone https://github.com/kdrag0n/proton-clang clang	
 	git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9 --depth=1 gcc
 	git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9 --depth=1 gcc32
